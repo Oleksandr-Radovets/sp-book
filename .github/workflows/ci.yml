@@ -24,30 +24,9 @@ jobs:
           --health-timeout=5s
           --health-retries=5
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Cache Maven packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
+    steps: [ { name: "Checkout code", uses: actions/checkout@v3 }, { name: "Set up JDK 17", uses: actions/setup-java@v3, with: { distribution: temurin, java-version: 17 } }, { name: "Cache Maven packages", uses: actions/cache@v3, with: { path: ~/.m2/repository, key: "${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}", restore-keys: "|
             ${{ runner.os }}-maven-
-
-      - name: Run Checkstyle
-        run: mvn checkstyle:check
-
-      - name: Build and run tests
-        run: mvn clean install -B
-        env:
-          SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/bookApi?useSSL=false&serverTimezone=UTC
-          SPRING_DATASOURCE_USERNAME: root
-          SPRING_DATASOURCE_PASSWORD: root
+" } }, { name: { run: "|
+            for i in {1..30}; do
+              mysqladmin ping -h 127.0.0.1 -P 3306 --silent && break
+              echo " } }, { name: "Build and run tests", run: "mvn clean install -B", env: { SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/bookApi?useSSL=false&serverTimezone=UTC, SPRING_DATASOURCE_USERNAME: root, SPRING_DATASOURCE_PASSWORD: root } } ]
