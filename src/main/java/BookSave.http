@@ -5,7 +5,7 @@ Content-Type: application/json
   "title": "Clean Code",
   "author": "Robert C. Martin",
   "isbn": "11",
-  "price": 35.99,
+  "price": 10,
   "description": "A Handbook of Agile Software Craftsmanship",
   "coverImage": "https://example.com/cleancode.jpg"
 }
@@ -18,7 +18,7 @@ Content-Type: application/json
   "title": "Paganin",
   "author": "Robert C. Martin",
   "isbn": "12",
-  "price": 35.99,
+  "price": 12.99,
   "description": "A Handbook of Agile Software Craftsmanship",
   "coverImage": "https://example.com/cleancode.jpg"
 }
@@ -31,7 +31,7 @@ Content-Type: application/json
   "title": "Dog",
   "author": "Robert C. Martin",
   "isbn": "13",
-  "price": 35.99,
+  "price": 19.99,
   "description": "A Handbook of Agile Software Craftsmanship",
   "coverImage": "https://example.com/cleancode.jpg"
 }
@@ -45,4 +45,9 @@ Accept: application/json
 ###
 GET http://localhost:8080/book/getById?id=2
 Host: localhost:8080
+Accept: application/json
+
+
+###
+GET http://localhost:8080//book/betweenByprice?price1=11&price2=20
 Accept: application/json
