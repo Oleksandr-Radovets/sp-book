@@ -4,6 +4,7 @@ import com.example.sptest.dto.BookDto;
 import com.example.sptest.dto.CreateBookDto;
 import org.springframework.data.domain.Pageable;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public interface BookService {
@@ -12,4 +13,6 @@ public interface BookService {
     List<BookDto> allBook(Pageable pageable);
 
     BookDto getById(Long id);
+
+    List<BookDto> allBookByPriceBetween(BigDecimal low, BigDecimal high);
 }

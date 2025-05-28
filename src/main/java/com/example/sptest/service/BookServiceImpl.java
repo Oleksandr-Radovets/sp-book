@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -41,6 +42,12 @@ public class BookServiceImpl implements BookService {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("can't by id " + id));
         return bookMapper.toDto(book);
+    }
+
+    @Override
+    public List<BookDto> allBookByPriceBetween(BigDecimal low, BigDecimal high) {
+        return bookRepository.findAllByPriceBetween(low, high)
+                .stream().map(bookMapper::toDto).toList();
     }
 
 }
